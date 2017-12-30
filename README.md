@@ -9,3 +9,7 @@
 	* build.py:execute and build new project with command: python app.py
 
 ### show flask mysql deal
+	* pip install flask-sqlalchemy
+	* pip install pymysql
+
+### does python has package manager like npm
