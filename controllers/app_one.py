@@ -1,5 +1,5 @@
 import flask
-
+from models.User import db,User
 # this is flask frame output app , entry file import this
 '''
 	@ blueprint_name : self define 
@@ -10,6 +10,7 @@ import flask
 '''
 #app_one would export to the entry file
 app_one = flask.Blueprint('app_one',__name__,url_prefix='/app_one')
+req = flask.request
 
 @app_one.route("/")
 def index():
@@ -25,3 +26,34 @@ def one_one():
 def one_two():
 	print "this is app_one /two"
 	return flask.render_template("app_one/index.html",data={"title":"app_one:two"})
+
+@app_one.route("/useradd",methods=['GET'])
+def useradd():
+	user = req.args.get('user')
+	pswd = req.args.get('pswd')
+	email = req.args.get('email')
+	client = User()
+	# print client
+	try:
+		client.username=user 
+		client.password=pswd
+		client.gender=0
+		client.email=email
+		client.saying="Be better !"
+		db.session.add(client)
+		db.session.commit()
+	except Exception as e:
+		print (e)
+	return 'Save Data Ok'
+
+@app_one.route("/usershow",methods=['GET'])
+def usershow():
+	id=req.args.get('id')
+	user = None
+	if id:
+		user = User.query.filter_by(id=id).all()
+	else:
+		user = User.query.all()
+	print user
+	return flask.render_template("app_one/user.html",user=user)
+
