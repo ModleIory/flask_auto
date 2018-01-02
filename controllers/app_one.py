@@ -40,10 +40,14 @@ def useradd():
 		client.gender=0
 		client.email=email
 		client.saying="Be better !"
+		client.nickname="modle jaxure"
+		client.other = "I am other"
 		db.session.add(client)
 		db.session.commit()
 	except Exception as e:
+		print 'Error below is :'
 		print (e)
+		return "save Date error!"
 	return 'Save Data Ok'
 
 @app_one.route("/usershow",methods=['GET'])

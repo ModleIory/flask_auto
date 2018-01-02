@@ -14,24 +14,20 @@ db=SQLAlchemy(app)
 '''
 #here,increate automantic
 '''
-class User(db.Model):
+class Book(db.Model):
 
 	id=db.Column(db.Integer,primary_key=True)
-	username=db.Column(db.String(20),unique=True)
-	password=db.Column(db.String(20),unique=True)
-	email = db.Column(db.String(120), unique=True)
-	gender = db.Column(db.Integer)
-	saying = db.Column(db.String(200))
-	age = db.Column(db.Integer)
-	nickname = db.Column(db.String(20),unique=True)
-	other = db.Column(db.String(20))
+	user_id = db.Column(db.Integer)
+	begin_time = db.Column(db.Date)
+	end_time = db.Column(db.Date)
+	name = db.Column(db.String(20))
+	description = db.Column(db.String(50),default="No more description")
 	#when init must give value , not null
-	def __init__(self, username=None, email=None):
-		self.username = username
-		self.email = email
+	def __init__(self):
+		pass
 
 	def __repr__(self):
-		return '<User %r>' % self.username
+		return '<Book %r>' % self.name
 
 
 
